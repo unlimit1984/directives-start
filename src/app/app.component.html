@@ -17,6 +17,7 @@
           </li>
 
         </div>
+<!--        1st option-->
         <div *ngIf="!onlyOdd">
           <li
             class="list-group-item"
@@ -25,11 +26,23 @@
             *ngFor="let even of evenNumbers">
             {{even}}
           </li>
-
         </div>
+<!--        2nd option-->
+<!--        *ngif is really transforming to the following code, where * is disappearing and ngif is transforming to property binding-->
+        <ng-template [ngIf]="!onlyOdd">
+          <div>
+            <li
+              class="list-group-item"
+              [ngClass]="{odd: even %2! ==0}"
+              [ngStyle]="{backgroundColor: even % 2 !==0 ? 'yellow' : 'transparent'}"
+              *ngFor="let even of evenNumbers">
+              {{even}}
+            </li>
+          </div>
+        </ng-template>
       </ul>
       <p appBasicHighlight>Style me with BasicHighlight directive</p>
-      <p appBetterHighlight>Style me with BasicHighlight directive</p>
+      <p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'red'">Style me with BasicHighlight directive</p>
     </div>
   </div>
 </div>
